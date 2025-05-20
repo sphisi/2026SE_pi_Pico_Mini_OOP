@@ -83,7 +83,7 @@ From the above real world control system we will model:
 | GP3  | Red LED              |
 | GP4  | Keyboard Interrupt   |
 | GP5  | Amber LED            |
-| GP7  | Red LED              |
+| GP6  | Red LED              |
 | GP17 | Flashing Green LED   |
 | GP19 | Flashing Red LED     |
 | GP22 | Button signal        |
