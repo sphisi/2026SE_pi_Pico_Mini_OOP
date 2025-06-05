@@ -1,12 +1,18 @@
+
+
+
+
+
+
 from machine import Pin
 from time import sleep, time
 
-
 class Led_lights(Pin):
     #inhereitance using Pin class
-    def __init__(self, pin, flashing,=False, debug=False):
+    def __init__(self, pin, flashing=False, debug=False):
         super().__init__(pin, Pin.OUT)
         #defines state
+        self.led_light_state
         self.__debug = debug
         self.__pin = pin
         self.__flashing = flashing
@@ -25,9 +31,9 @@ class Led_lights(Pin):
 
     def toggle(self):
         #overide polymorphism of class for toggle
-        if self.value():
+        if self.value() == 0:
             self.on()
-        else:
+        elif self.value ==1:
             self.off()
 
     @property
@@ -44,13 +50,9 @@ class Led_lights(Pin):
             self.off()
 
 
-
-
 red_light = Led_lights(3, False, True)
 
-
 while True:
-    red_light.on()
-    sleep(1)
-    red_light.off()
+    red_light.toggle()
+    print(red_light.led_light_state)
     sleep(1)
