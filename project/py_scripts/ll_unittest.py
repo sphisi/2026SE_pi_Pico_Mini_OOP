@@ -3,8 +3,8 @@ from machine import Pin
 from time import sleep
 
 red_car_led = led_light(3, False)
-orange_car_led = led_light(4, False)
-green_car_led = led_light(5, False)
+orange_car_led = led_light(5, False)
+green_car_led = led_light(6, False)
 
 sleep(1)
 

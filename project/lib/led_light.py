@@ -50,14 +50,3 @@ class led_light(Pin):
         if self.__flashing and now - self.__last_toggle_time >= 0.5:
             self.toggle()
             self.__last_toggle_time = now
-
-
-
-while True:
-    red_light.toggle()
-    print(red_light.led_light_state)
-    sleep(1)
-
-
-
-
