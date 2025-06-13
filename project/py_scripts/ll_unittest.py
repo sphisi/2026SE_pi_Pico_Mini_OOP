@@ -9,7 +9,7 @@ green_car_led = led_light(6, False)
 sleep(1)
 
 print("testing leds and state")
-for i in range(3):
+for i in range(2):
     #toggle each in a row
     green_car_led.off()
     red_car_led.on()
