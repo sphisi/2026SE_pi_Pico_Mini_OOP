@@ -21,4 +21,3 @@ class Audio_Notification(PWM):
         if self.__debug:
             print("warning off")
         self.__duty_u16  # turn off sound
-
