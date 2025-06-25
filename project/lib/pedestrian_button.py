@@ -13,15 +13,15 @@ class Pedestrian_Button(Pin):
         self.irq(trigger=Pin.IRQ_RISING, handler=self.callback)
 
     def button_state(self, value=None):
-    if value is None:
-        # Getter
-        if self.__debug:
-            print(f"Button connected to Pin {self.__pin} is {'WAITING' if self.__pedestrian_waiting else 'NOT WAITING'}")
-        return self.__pedestrian_waiting
-    else:
-        self.__pedestrian_waiting = bool(value)  # Convert to boolean to ensure proper type
-        if self.__debug:
-            print(f"Button state on Pin {self.__pin} set to {self.__pedestrian_waiting}")
+        if value is None:
+            # Getter
+            if self.__debug:
+                print(f"Button connected to Pin {self.__pin} is {'WAITING' if self.__pedestrian_waiting else 'NOT WAITING'}")
+            return self.__pedestrian_waiting
+        else:
+            self.__pedestrian_waiting = bool(value)  # Convert to boolean to ensure proper type
+            if self.__debug:
+                print(f"Button state on Pin {self.__pin} set to {self.__pedestrian_waiting}")
 
     def callback(self, pin):
         current_time = time.ticks_ms() #get time in ms

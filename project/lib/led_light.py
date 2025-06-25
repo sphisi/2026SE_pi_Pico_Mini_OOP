@@ -1,7 +1,7 @@
 from machine import Pin
 from time import sleep, time
 
-class led_light(Pin):
+class Led_light(Pin):
     #inhereitance using Pin class
     def __init__(self, pin, flashing=False, debug=False):
         super().__init__(pin, Pin.OUT)
