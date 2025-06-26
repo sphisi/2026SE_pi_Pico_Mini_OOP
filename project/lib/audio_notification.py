@@ -3,7 +3,7 @@ from time import sleep, time
 
 class Audio_Notification(PWM):
     def __init__(self, pin, debug=False):
-        super().__init_(Pin(pin))
+        super().__init__(Pin(pin))
         self.__pin = pin
         self.__debug = debug
         self.__duty_u16(0) #start buzzer as off

@@ -65,3 +65,41 @@ class PedestrianSubsystem:
     
     def reset_button(self):
         self.__button.button_state(False)
+
+class controller:
+    def __init__(self, ped_red, ped_green, car_red, car_green, car_amber, button, buzzer, debug):
+        self.__traffic_lights = TrafficLightSubsytem(car_red, car_green, car_amber, debug)
+        self.__pedestrian_lights = PedestrianSubsystem(ped_red, ped_green, button, buzzer, debug)
+        self.__debug = debug
+        self.state = "IDLE"
+        self.last_state_change = time()
+
+    def set_idle(self):
+        if self.__debug:
+            print("System: IDLE state")
+        self.__pedestrian_lights.show_stop()
+        self.__traffic_lights.show_green()
+
+    def set_change_state(self):
+        if self.__debug:
+            print("State: CHANGING")
+        self.__pedestrian_lights.show_stop
+        self.__traffic_lights.show_amber
+    
+    def set_walk_state(self):
+        if self.__debug:
+            print("State: WALKING")
+        self.__pedestrian_lights.show_walk
+        self.__traffic_lights.show_red
+
+    def set_waring_state(self):
+        if self.__debug:
+            print("State: WARNING")
+        self.__pedestrian_lights.show_warning
+        self.__traffic_lights.show_red
+
+    def error_state(self):
+        if self.__debug:
+            print("State: ERROR")
+        self.__pedestrian_lights.show_warning
+        self.__traffic_lights.show_amber
