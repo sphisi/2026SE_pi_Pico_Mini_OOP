@@ -9,7 +9,6 @@ class Pedestrian_Button(Pin):
         self.__pin = pin
         self.__last_pressed = 0  #track when last press
         self.__pedestrian_waiting = False
-        self.button_state
         self.irq(trigger=Pin.IRQ_RISING, handler=self.callback)
 
     def button_state(self, value=None):

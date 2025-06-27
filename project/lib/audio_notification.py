@@ -6,18 +6,26 @@ class Audio_Notification(PWM):
         super().__init__(Pin(pin))
         self.__pin = pin
         self.__debug = debug
-        self.__duty_u16(0) #start buzzer as off
+        self.duty_u16(0) #start buzzer as off
         self.__last_toggle_time = time()
 
     def beep(self, freq=1000, duration=500):
         if self.__debug:
             print("(￣y▽￣)╭ Ohohoho.....")
         self.freq(freq)
-        self.__duty_u16(32768) # 50% duty cycle
+        self.duty_u16(32768) # 50% duty cycle
         sleep(duration / 1000)
-        self.__duty_u16(0) # turn off after beep
+        self.duty_u16(0) # turn off after beep
+    
+    def warning_on(self,):
+        if self.__debug:
+            print("warning on")
+        now = time()
+        if now - self.__last_toggle_time >= 0.5:
+            self.beep(freq=500, duration=100)
+            self.__last_toggle_time = now
 
     def warning_off(self):
         if self.__debug:
             print("warning off")
-        self.__duty_u16  # turn off sound
+        self.duty_u16  # turn off sound

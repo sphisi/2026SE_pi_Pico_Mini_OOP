@@ -68,7 +68,7 @@ class PedestrianSubsystem:
 
 class controller:
     def __init__(self, ped_red, ped_green, car_red, car_green, car_amber, button, buzzer, debug):
-        self.__traffic_lights = TrafficLightSubsytem(car_red, car_green, car_amber, debug)
+        self.__traffic_lights = TrafficLightSubsystem(car_red, car_green, car_amber, debug)
         self.__pedestrian_lights = PedestrianSubsystem(ped_red, ped_green, button, buzzer, debug)
         self.__debug = debug
         self.state = "IDLE"
@@ -79,27 +79,62 @@ class controller:
             print("System: IDLE state")
         self.__pedestrian_lights.show_stop()
         self.__traffic_lights.show_green()
+        self.state = "IDLE"
 
     def set_change_state(self):
         if self.__debug:
             print("State: CHANGING")
         self.__pedestrian_lights.show_stop
         self.__traffic_lights.show_amber
+        self.state = "CHANGING"
     
     def set_walk_state(self):
         if self.__debug:
             print("State: WALKING")
         self.__pedestrian_lights.show_walk
         self.__traffic_lights.show_red
+        self.state = "WALKING"
 
-    def set_waring_state(self):
+    def set_warning_state(self):
         if self.__debug:
             print("State: WARNING")
         self.__pedestrian_lights.show_warning
         self.__traffic_lights.show_red
+        self.state = "WARNING"
 
     def error_state(self):
         if self.__debug:
             print("State: ERROR")
         self.__pedestrian_lights.show_warning
         self.__traffic_lights.show_amber
+        self.state = "ERROR"
+
+    def update(self):
+        
+        print("Running")
+        self.last_state_change = time()
+
+        if self.state == "IDLE":
+            self.state = self.set_idle
+            if time() - self.last_state_change >=10 and self.__pedestrian_lights.is_button_pressed()
+                self.state = self.set_change_state
+                self.last_state_change = time()
+                self.__pedestrian_lights.reset_button
+
+        elif self.state == "CHANGING":
+            self.state = self.set_change_state
+            if time() - self.last_state_change >= 5:
+                self.state = self.set_walk_state
+                self.last_state_change = time()
+
+        elif self.state == "WALKING":
+            self.state = self.set_walk_state
+            if time() - self.last_state_change >=5:
+                self.state = self.set_warning_state
+                self.last_state_change = time()
+
+        elif self.state == "WARNING":
+            self.state = self.set_warning_state
+            if time() - self.last_state_change >=5:
+                self.state = self.set_idle
+                self.last_state_change = time()
